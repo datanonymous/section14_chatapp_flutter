@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
+
+  AuthForm(this.submitFn);
+  final void Function(
+    String email,
+    String password,
+    String userName,
+    bool isLogin,
+      BuildContext ctx,
+  ) submitFn;
+
   @override
   _AuthFormState createState() => _AuthFormState();
 }
@@ -15,6 +25,13 @@ class _AuthFormState extends State<AuthForm> {
       print(_userEmail);
       print(_userName);
       print(_userPassword);
+      widget.submitFn(
+        _userEmail.trim(),
+        _userPassword.trim(),
+        _userName.trim(),
+        _isLogin,
+        context,
+      );
       // use values to send our auth request
     }
   }
@@ -39,6 +56,7 @@ class _AuthFormState extends State<AuthForm> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   TextFormField(
+                    key: ValueKey('userEmail'),
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(labelText: 'Email address'),
                     validator: (value) {
@@ -51,8 +69,9 @@ class _AuthFormState extends State<AuthForm> {
                       _userEmail = value;
                     },
                   ),
-                  if(!_isLogin)
+                  if (!_isLogin)
                     TextFormField(
+                      key: ValueKey('userName'),
                       decoration: InputDecoration(labelText: 'Username'),
                       validator: (value) {
                         if (value.isEmpty || value.length < 4) {
@@ -65,6 +84,7 @@ class _AuthFormState extends State<AuthForm> {
                       },
                     ),
                   TextFormField(
+                    key: ValueKey('userPassword'),
                     decoration: InputDecoration(
                       labelText: 'Password',
                     ),
@@ -85,7 +105,9 @@ class _AuthFormState extends State<AuthForm> {
                     onPressed: _trySubmit,
                   ),
                   FlatButton(
-                    child: Text(_isLogin ? 'Create new account' : 'I already have an account.'),
+                    child: Text(_isLogin
+                        ? 'Create new account'
+                        : 'I already have an account.'),
                     textColor: Theme.of(context).primaryColor,
                     onPressed: () {
                       setState(() {
