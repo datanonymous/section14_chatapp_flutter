@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../widgets/chat/new_message.dart';
 import '../widgets/chat/messages.dart';
 
 class ChatScreen extends StatelessWidget {
@@ -43,6 +44,7 @@ class ChatScreen extends StatelessWidget {
             Expanded(
               child: Messages(),
             ),
+            NewMessage(),
           ],
         ),
       ),
@@ -67,24 +69,24 @@ class ChatScreen extends StatelessWidget {
 //          );
 //        },
 //      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          Firestore.instance
-              .collection('chats/Gbpt8A8N1eUEvpGyFnll/messages')
-              .add({'text': 'This was added by clicking the button!'});
-          //lecture 311
+//      floatingActionButton: FloatingActionButton(
+//        child: Icon(Icons.add),
+//        onPressed: () {
 //          Firestore.instance
 //              .collection('chats/Gbpt8A8N1eUEvpGyFnll/messages')
-//              .snapshots()
-//              .listen((data) {
-//            print(data.documents[0]['text']);
-//            data.documents.forEach((element) {
-//              print(element['text']);
-//            });
-//          });
-        },
-      ),
+//              .add({'text': 'This was added by clicking the button!'});
+//          //lecture 311
+////          Firestore.instance
+////              .collection('chats/Gbpt8A8N1eUEvpGyFnll/messages')
+////              .snapshots()
+////              .listen((data) {
+////            print(data.documents[0]['text']);
+////            data.documents.forEach((element) {
+////              print(element['text']);
+////            });
+////          });
+//        },
+//      ),
     );
   }
 }
