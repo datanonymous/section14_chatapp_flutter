@@ -83,7 +83,7 @@ class _AuthScreenState extends State<AuthScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
-        title: Text('asdf'),
+        title: Text('Cat Chat'),
       ),
       body: AuthForm(_submitAuthForm, _isLoading),
     );
